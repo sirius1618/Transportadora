@@ -1,6 +1,7 @@
 package com.github.sirius1618.transportadora_carros.interfaces;
 
 import com.github.sirius1618.transportadora_carros.interfaces.dto.input.SolicitarViagemInput;
+import com.github.sirius1618.transportadora_carros.interfaces.mapper.SolicitarViagemMapper;
 import com.github.sirius1618.transportadora_carros.model.SolicitacaoViagem;
 import com.github.sirius1618.transportadora_carros.servece.ViagemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,11 @@ public class SolicitarViagemAPI {
     @Autowired
     ViagemService viagemService;
 
+    @Autowired
+    SolicitarViagemMapper mapper;
+
     @PostMapping()
-    public void solicitarViagem(@RequestBody SolicitarViagemInput SolicitacaoViagem) {
-        viagemService.saveSolicitarViagem(SolicitacaoViagem);
+    public void solicitarViagem(@RequestBody SolicitarViagemInput solicitarViagemInput) {
+        viagemService.saveSolicitarViagem(mapper.map(solicitarViagemInput));
     }
 }
